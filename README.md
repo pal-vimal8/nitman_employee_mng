@@ -1,6 +1,7 @@
 # Office Employee Management System
 
-The Office Employee Management System is a web-based application designed to streamline employee management tasks within an office environment.
+The Office Employee Management System is a web-based application designed to streamline employee management tasks within an office environment. basically this project manages the employee informations like on which day employee joins a company and leaves a comapny
+with all employees personal details.
 
 ## Features
 
