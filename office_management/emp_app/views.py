@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render,HttpResponse,get_object_or_404
 from .models import *
 from datetime import datetime
 from django.db.models import Q
+from django.contrib import messages
 
 # Create your views here.
 
@@ -36,11 +37,18 @@ def add_emp(request):
             new_emp.save()
         except Exception as e:
             return HttpResponse(f'An error occurred: {str(e)}')
-        return render(request, 'all_emp.html')
+        # return render(request, 'all_emp.html')
         # return HttpResponse('employee added successfully')
+        return redirect('all_emp')
     
     elif request.method == 'GET':
-        return render(request, 'add_emp.html')
+        departs = Department.objects.all()
+        roles = Role.objects.all()
+        context = {
+            'departs':departs,
+        'roles':roles
+        }
+        return render(request, 'add_emp.html',context)
     else:
         return HttpResponse('An error exception')
 
@@ -50,7 +58,8 @@ def remove_emp(request,emp_id = 0):
         try:
             emp_to_be_removed = Employee.objects.get(id=emp_id)
             emp_to_be_removed.delete()
-            return HttpResponse('employee removed successfully')
+            # return HttpResponse('employee removed successfully')
+            return redirect('all_emp')
         except:
             return HttpResponse('Please Enter a valid emp id')
     emps = Employee.objects.all()
